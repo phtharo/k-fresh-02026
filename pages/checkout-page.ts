@@ -5,7 +5,6 @@ import { step } from '../utilities/logging';
 import { CheckoutLocators } from '../locators/checkout-locators';
 import { Address } from '../models/address';
 
-
 export class CheckoutPage extends CheckoutLocators {
 
   commonPage: CommonPage;
@@ -77,5 +76,4 @@ export class CheckoutPage extends CheckoutLocators {
   @step('Update Product Quantity')
   async updateProductQuantity(productName: string, quantity: number): Promise<void> {
   }
-
 }
