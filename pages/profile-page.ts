@@ -37,4 +37,3 @@ export class ProfilePage extends ProfileLocators {
   
   }
 }
-

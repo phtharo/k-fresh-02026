@@ -20,7 +20,6 @@ export class RegisterLocators extends CommonLocators {
   radioNewsletterYes!: Locator;
   radioNewsletterNo!: Locator;
   chkPrivacyPolicy!: Locator;
-  btnContinue!: Locator;
   btnSuccessContinue!: Locator;
   lblSuccessMessage!: Locator;
   lblSuccessPageContent!: Locator;

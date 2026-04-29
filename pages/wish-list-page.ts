@@ -1,9 +1,8 @@
-import test, { expect, Page } from '@playwright/test';
-import { Constants } from '../utilities/constants';
-import { CommonPage } from './common-page';
-import { step } from '../utilities/logging';
-import { WishListLocators } from '../locators/wish-list-locators';
-import { Product } from '../models/product';
+import { Page } from '@playwright/test';
+import { CommonPage } from '@pages/common-page';
+import { step } from '@utilities/logging';
+import { WishListLocators } from '@locators/wish-list-locators';
+import { Product } from '@models/product';
 
 export class WishListPage extends WishListLocators {
 

@@ -82,7 +82,7 @@ export class CartPage extends CartLocators {
     await this.assertHelper.assertElementHasValue(this.inputQuantity(product.name), product.quantity.toString());
     const totalText = await this.commonPage.innerText(this.cellTotal(product.name));
     const actualTotal = Currency.parseCurrency(totalText);
-    const expectedTotal = product.price * product.quantity;
+    const expectedTotal = Number(product.price) * product.quantity;
     Assertions.assertEqual(actualTotal, expectedTotal, `Expected total for ${product.name} to be ${expectedTotal}`);
   }
 
@@ -154,7 +154,7 @@ export class CartPage extends CartLocators {
   async verifyUpdatedProductQuantity(product: Product): Promise<void> {
     const totalText = await this.commonPage.innerText(this.cellTotal(product.name));
     const actualTotal = Currency.parseCurrency(totalText);
-    const expectedTotal = product.price * product.quantity;
+    const expectedTotal = Number(product.price) * product.quantity;
     Assertions.assertEqual(actualTotal, expectedTotal, `Expected updated total for ${product.name} to be ${expectedTotal}`);
     await this.assertHelper.assertElementHasValue(this.inputQuantity(product.name), product.quantity.toString());
   }

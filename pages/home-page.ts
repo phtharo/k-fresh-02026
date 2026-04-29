@@ -24,13 +24,16 @@ export class HomePage extends HomeLocators {
   }
 
   /**
-   * Selects a menu item from the main navigation.
-   * @param menuName The name of the menu item to select.
+   * Navigate to product category page
+   * @param menuName Category name
    */
   @step('Select Menu')
   async selectMenu(menuName: string): Promise<void> {
     await this.commonPage.click(this.menuLink(menuName));
     await this.page.waitForLoadState('networkidle');
+    await this.commonPage.click(this.shopByCategoryMenu);
+    await this.commonPage.waitForVisible(this.itemTopCategory(menuName));
+    await this.commonPage.click(this.itemTopCategory(menuName));
   }
 
   /**
@@ -58,8 +61,8 @@ export class HomePage extends HomeLocators {
   }
 
   /**
-  * Navigates directly to the Home Page(Base URL).
-  * This is the ONLY place where page.goto() should be used.
+   * Navigates directly to the Home Page (Base URL).
+   * This is the ONLY place where page.goto() should be used.
    */
   @step('Navigate to Home Page')
   async navigateToHomePage(): Promise<void> {

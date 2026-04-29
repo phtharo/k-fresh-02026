@@ -12,5 +12,4 @@ export class MyOrdersPage extends MyOrdersLocators {
     super(page);
     this.commonPage = new CommonPage(page);
   }
-
 }

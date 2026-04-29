@@ -1,4 +1,3 @@
-
 import test, { expect, Page } from '@playwright/test';
 import { Constants } from '@utilities/constants';
 import { CommonPage } from '@pages/common-page';
@@ -40,7 +39,7 @@ export class ProductPage extends ProductLocators {
   @step('Click Add to Compare Button')
   async clickAddToCompareButton(productName: string): Promise<void> {
     await this.clickProductLink(productName);
-    await this.commonPage.click(this.btnCompare);
+    await this.commonPage.click(this.btnCompare(productName));
   }
 
   /**
@@ -230,19 +229,32 @@ export class ProductPage extends ProductLocators {
   }
 
   /**
+   * Add one or more products to Compare, verify them, and close the Toast message.
+   * @param products - List of Product objects that need to be added
+   */
+  @step('Add multiple products to compare and verify toast')
+  async addProductsToCompare(products: Product[]): Promise<void> {
+    for (const product of products) {
+      await this.performActionOnProduct(product, ActionType.COMPARE);
+      await this.commonPage.waitForVisible(this.toastMessage(product.name));
+    }
+  }
+
+  /**
    *  Clicks the "Inquiry" button for the specified product.
    * @param productName
    */
   @step('Click Inquiry Button')
   async clickInqueryButton(productName: string): Promise<void> { }
+
   @step('Clicking the add to cart button to add the product to the cart')
   async clickAddToCart(): Promise<void> {
     await this.commonPage.roleButtonName('Add to Cart').click({ force: true });
   }
 
   /**
-   * Verifies that the success alert displays the expected message after adding a product to the cart
-   * @param expectedMessage
+   * Scrapes all visible products on the page and converts them into Product objects.
+   * Useful for dynamic data-driven testing.
    */
   @step('Verifying that the success alert displays the expected message after adding a product to the cart')
   async verifyAddToCartSuccessMessage(expectedMessage: string): Promise<void> {
@@ -263,7 +275,7 @@ export class ProductPage extends ProductLocators {
     await this.assertHelper.assertElementVisible(this.divSuccessAlert);
     await this.commonPage.click(this.roleLinkName('View Cart', false));
   }
-  
+
   /**
      * Sets the quantity of the product to be added to the cart.
      * @param qty 
@@ -272,7 +284,7 @@ export class ProductPage extends ProductLocators {
   async setQuantity(qty: number): Promise<void> {
     await this.commonPage.fill(this.inputQuantity, qty.toString());
   }
- 
+
   /**
   * Adds an item to the cart using standard UI navigation (Search -> Product Detail -> Add to Cart).
   * @param searchTerm The name of the product to search for (e.g., 'HP LP3065').
@@ -291,9 +303,30 @@ export class ProductPage extends ProductLocators {
   }
 
   /**
-   * Search and Navigate to Product Page via UI Navigation
-   * @param product The name of the product to search for (e.g., 'HP LP3065').
+   * Close toast message by name
+   * @param name - Name of the toast message
    */
+  @step('Close toast message by name')
+  async closeToast(name: string): Promise<void> {
+    await this.commonPage.click(this.btnCloseToast(name));
+    await this.commonPage.waitForHidden(this.toastBody.first());
+  }
+
+  /**
+   * Navigate to compare page
+   * @param productName - Name of the product
+   */
+  @step('Navigate to compare page')
+  async clickNavigateToComparePage(productName: string): Promise<void> {
+    const btnNavigate = this.btnNavigateToComparePage(productName);
+    await this.commonPage.waitForVisible(btnNavigate);
+    await this.commonPage.click(btnNavigate);
+  }
+
+  /**
+    * Search and Navigate to Product Page via UI Navigation
+     * @param product The name of the product to search for (e.g., 'HP LP3065').
+     */
   @step('Search and Navigate to Product Page via UI Navigation')
   async searchAndSelectProduct(product: Product): Promise<void> {
     await this.commonPage.waitForVisible(this.inputProductSearch);
