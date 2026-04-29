@@ -1,6 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { CommonLocators } from './common-locators';
-
+import { CommonLocators } from '@locators/common-locators';
 
 export class CompareProductsLocators extends CommonLocators {
 
@@ -8,7 +7,6 @@ export class CompareProductsLocators extends CommonLocators {
     super(page);
     this.locatorInitialization();
   }
-  
 
   locatorInitialization(): void {
     super.locatorInitialization();

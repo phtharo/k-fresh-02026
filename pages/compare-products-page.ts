@@ -1,9 +1,8 @@
-import test, { expect, Page } from '@playwright/test';
-import { Constants } from '../utilities/constants';
-import { CommonPage } from './common-page';
-import { step } from '../utilities/logging';
-import { CompareProductsLocators } from '../locators/compare-products-locators';
-import { Product } from '../models/product';
+import { Page } from '@playwright/test';
+import { CommonPage } from '@pages/common-page';
+import { step } from '@utilities/logging';
+import { CompareProductsLocators } from '@locators/compare-products-locators';
+import { Product } from '@models/product';
 
 export class CompareProductsPage extends CompareProductsLocators {
 
@@ -20,7 +19,6 @@ export class CompareProductsPage extends CompareProductsLocators {
    */
   @step('Click Remove Product Button')
   async clickRemoveProductButton(productName: string): Promise<void> {
-    
   }
 
   /**
@@ -55,5 +53,4 @@ export class CompareProductsPage extends CompareProductsLocators {
   async getProductNames(): Promise<string[]> {
     return [];
   }
-
 }

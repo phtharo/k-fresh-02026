@@ -1,5 +1,6 @@
 import { FrameLocator, Locator, Page } from '@playwright/test';
 export class CommonLocators {
+
     page: Page;
 
     constructor(page: Page) {
@@ -26,6 +27,7 @@ export class CommonLocators {
     btnCancelDelete!: Locator;
     inputSearch!: Locator;
     ddlOption!: Locator;
+    chkAgreeTerms!: Locator;
     ddlOptionItem!: (option: string) => Locator;
     linkText!: (name: string) => Locator;
 
@@ -34,12 +36,10 @@ export class CommonLocators {
     Iframe3!: FrameLocator;
     Iframe4!: FrameLocator;
 
-
     iframe1 = 'iframe[name="RadWindow1"]';
     iframe2 = 'iframe[name="RadWindow2"]';
     iframe3 = 'iframe[name="RadWindow3"]';
     iframe4 = 'iframe[name="RadWindow4"]';
-
 
     locatorInitialization(): void {
         this.Iframe1 = this.page.frameLocator(this.iframe1);
@@ -47,13 +47,12 @@ export class CommonLocators {
         this.Iframe3 = this.page.frameLocator(this.iframe3);
         this.Iframe4 = this.page.frameLocator(this.iframe4);
 
-
         this.btnSave = this.page.locator('button:has-text("Save")');
         this.btnCancel = this.page.locator('button:has-text("Cancel")');
-        this.btnEdit = this.page.locator('button:has-text("Edit")');
-        this.btnDelete = this.page.locator('button:has-text("Delete")');
-        this.btnAddNew = this.page.locator('button:has-text("Add New")');
-        this.btnSubmit = this.page.locator('button[type="submit"]');
+        this.btnEdit = this.page.locator('//a[text()="Edit"]');
+        this.btnDelete = this.page.locator('//a[text()="Delete"]');
+        this.btnAddNew = this.page.locator('//a[text()="New Address"]');
+        this.btnSubmit = this.page.locator('//input[@type="submit"]');
         this.btnConfirmDelete = this.page.locator('button:has-text("Confirm Delete")');
         this.btnCancelDelete = this.page.locator('button:has-text("Cancel Delete")');
         this.inputSearch = this.page.locator('input[placeholder="Search"]');
@@ -67,6 +66,8 @@ export class CommonLocators {
         this.ddlOptionItem = (optionName: string): Locator => {
             return this.page.locator(`xpath=//ul/li[text()="${optionName}"]`);
         };
+
+        this.chkAgreeTerms = this.page.locator('label[for="input-agree"]');
 
     }
 
@@ -217,7 +218,6 @@ export class CommonLocators {
         return this.page.getByRole('textbox', { name, exact });
     }
 
-
     /**
      * Find element by option name
      * @param name
@@ -289,5 +289,4 @@ export class CommonLocators {
     locatorIframeIframe(iframe1: string, iframe2: string, element: string): Locator {
         return this.page.frameLocator(iframe1).frameLocator(iframe2).locator(element);
     }
-
 }

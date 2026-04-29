@@ -1,6 +1,5 @@
-import { Locator, Page } from '@playwright/test';
-import { CommonLocators } from './common-locators';
-
+import { Page } from '@playwright/test';
+import { CommonLocators } from '@locators/common-locators';
 
 export class ProfileLocators extends CommonLocators {
 
@@ -9,7 +8,6 @@ export class ProfileLocators extends CommonLocators {
     this.locatorInitialization();
   }
   
-
   locatorInitialization(): void {
     super.locatorInitialization();
   }

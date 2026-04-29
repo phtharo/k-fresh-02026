@@ -1,10 +1,9 @@
 import test, { expect, Page } from '@playwright/test';
-import { Constants } from '../utilities/constants';
-import { CommonPage } from './common-page';
-import { step } from '../utilities/logging';
-import { ProfileLocators } from '../locators/profile-locators';
-import { UserProfile } from '../models/user';
-
+import { Constants } from '@utilities/constants';
+import { CommonPage } from '@pages/common-page';
+import { step } from '@utilities/logging';
+import { ProfileLocators } from '@locators/profile-locators';
+import { UserProfile } from '@models/user';
 
 export class ProfilePage extends ProfileLocators {
 
@@ -37,5 +36,5 @@ export class ProfilePage extends ProfileLocators {
   async updateConfiguationSettings(settingsData: any): Promise<void> {
   
   }
-
 }
+

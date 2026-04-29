@@ -1,6 +1,5 @@
-import { Generate } from './gen';
+import { Generate } from '@utilities/gen';
 import { randomInt } from 'node:crypto';
-
 
 /**
  * General-purpose utility helper shared by UI and API tests.
@@ -319,7 +318,6 @@ export class Utility {
         }
         return true;
     }
-
 
     /**
      * Compare Arrays by Exact Order
@@ -702,7 +700,6 @@ export class Utility {
         }
         return -1;
     }
-
 
     /**
      * Mapping keys values 2D Array
